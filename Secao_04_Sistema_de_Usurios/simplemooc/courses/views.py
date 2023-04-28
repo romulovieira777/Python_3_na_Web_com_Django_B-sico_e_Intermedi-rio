@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Course
 from .forms import ContactCourse
 
+
 def index(request):
     courses = Course.objects.all()
     template_name = 'courses/index.html'
@@ -10,6 +11,7 @@ def index(request):
         'courses': courses
     }
     return render(request, template_name, context)
+
 
 # def details(request, pk):
 #     course = get_object_or_404(Course, pk=pk)

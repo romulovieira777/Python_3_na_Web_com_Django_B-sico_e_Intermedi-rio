@@ -15,7 +15,6 @@ class CourseManager(models.Manager):
 
 
 class Course(models.Model):
-
     name = models.CharField('Nome', max_length=100)
     slug = models.SlugField('Atalho')
     description = models.TextField('Descrição Simples', blank=True)
@@ -38,7 +37,7 @@ class Course(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('courses:details', (), {'slug': self.slug})
+        return 'courses:details', (), {'slug': self.slug}
 
     def release_lessons(self):
         today = timezone.now().date()
@@ -51,7 +50,6 @@ class Course(models.Model):
 
 
 class Lesson(models.Model):
-
     name = models.CharField('Nome', max_length=100)
     description = models.TextField('Descrição', blank=True)
     number = models.IntegerField('Número (ordem)', blank=True, default=0)
@@ -78,7 +76,6 @@ class Lesson(models.Model):
 
 
 class Material(models.Model):
-
     name = models.CharField('Nome', max_length=100)
     embedded = models.TextField('Vídeo embedded', blank=True)
     file = models.FileField(upload_to='lessons/materials', blank=True, null=True)
@@ -97,7 +94,6 @@ class Material(models.Model):
 
 
 class Enrollment(models.Model):
-
     STATUS_CHOICES = (
         (0, 'Pendente'),
         (1, 'Aprovado'),
@@ -132,7 +128,6 @@ class Enrollment(models.Model):
 
 
 class Announcement(models.Model):
-
     course = models.ForeignKey(
         Course, verbose_name='Curso', related_name='announcements'
     )
@@ -152,7 +147,6 @@ class Announcement(models.Model):
 
 
 class Comment(models.Model):
-
     announcement = models.ForeignKey(
         Announcement, verbose_name='Anúncio', related_name='comments'
     )
@@ -181,6 +175,7 @@ def post_save_announcement(instance, created, **kwargs):
         for enrollment in enrollments:
             recipient_list = [enrollment.user.email]
             send_mail_template(subject, template_name, context, recipient_list)
+
 
 models.signals.post_save.connect(
     post_save_announcement, sender=Announcement,

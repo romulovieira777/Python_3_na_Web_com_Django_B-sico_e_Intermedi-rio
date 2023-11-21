@@ -6,3 +6,5 @@
 - [Seção 03 - Visão Externa dos Cursos](https://github.com/romulovieira777/Python_3_na_Web_com_Django_Basico_e_Intermediario/tree/main/Secao_03_Visao_Externa_dos_Cursos/simplemooc)
 - [Seção 04 - Sistema de Usuários](https://github.com/romulovieira777/Python_3_na_Web_com_Django_Basico_e_Intermediario/tree/main/Secao_04_Sistema_de_Usurios)
 - [Seção 05 - Acessando o Curso](https://github.com/romulovieira777/Python_3_na_Web_com_Django_Basico_e_Intermediario)
+- [Seção 06 - Deploy e Testes]()
+- 

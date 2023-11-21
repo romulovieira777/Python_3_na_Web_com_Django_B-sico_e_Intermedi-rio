@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import (UserCreationForm, PasswordChangeForm,
-    SetPasswordForm)
+                                       SetPasswordForm)
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
@@ -14,11 +14,13 @@ from .models import PasswordReset
 
 User = get_user_model()
 
+
 @login_required
 def dashboard(request):
     template_name = 'accounts/dashboard.html'
     context = {}
     return render(request, template_name, context)
+
 
 def register(request):
     template_name = 'accounts/register.html'
@@ -38,6 +40,7 @@ def register(request):
     }
     return render(request, template_name, context)
 
+
 def password_reset(request):
     template_name = 'accounts/password_reset.html'
     context = {}
@@ -47,6 +50,7 @@ def password_reset(request):
         context['success'] = True
     context['form'] = form
     return render(request, template_name, context)
+
 
 def password_reset_confirm(request, key):
     template_name = 'accounts/password_reset_confirm.html'
@@ -58,6 +62,7 @@ def password_reset_confirm(request, key):
         context['success'] = True
     context['form'] = form
     return render(request, template_name, context)
+
 
 @login_required
 def edit(request):
@@ -75,6 +80,7 @@ def edit(request):
         form = EditAccountForm(instance=request.user)
     context['form'] = form
     return render(request, template_name, context)
+
 
 @login_required
 def edit_password(request):

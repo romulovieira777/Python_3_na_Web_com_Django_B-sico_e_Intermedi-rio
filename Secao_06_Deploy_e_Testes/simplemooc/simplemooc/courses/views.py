@@ -6,6 +6,7 @@ from .models import Course, Enrollment, Announcement, Lesson, Material
 from .forms import ContactCourse, CommentForm
 from .decorators import enrollment_required
 
+
 def index(request):
     courses = Course.objects.all()
     template_name = 'courses/index.html'
@@ -13,6 +14,7 @@ def index(request):
         'courses': courses
     }
     return render(request, template_name, context)
+
 
 # def details(request, pk):
 #     course = get_object_or_404(Course, pk=pk)
@@ -38,6 +40,7 @@ def details(request, slug):
     template_name = 'courses/details.html'
     return render(request, template_name, context)
 
+
 @login_required
 def enrollment(request, slug):
     course = get_object_or_404(Course, slug=slug)
@@ -51,6 +54,7 @@ def enrollment(request, slug):
         messages.info(request, 'Você já está inscrito no curso')
 
     return redirect('accounts:dashboard')
+
 
 @login_required
 def undo_enrollment(request, slug):
@@ -69,6 +73,7 @@ def undo_enrollment(request, slug):
     }
     return render(request, template, context)
 
+
 @login_required
 @enrollment_required
 def announcements(request, slug):
@@ -79,6 +84,7 @@ def announcements(request, slug):
         'announcements': course.announcements.all()
     }
     return render(request, template, context)
+
 
 @login_required
 @enrollment_required
@@ -101,6 +107,7 @@ def show_announcement(request, slug, pk):
     }
     return render(request, template, context)
 
+
 @login_required
 @enrollment_required
 def lessons(request, slug):
@@ -114,6 +121,7 @@ def lessons(request, slug):
         'lessons': lessons
     }
     return render(request, template, context)
+
 
 @login_required
 @enrollment_required
@@ -129,6 +137,7 @@ def lesson(request, slug, pk):
         'lesson': lesson
     }
     return render(request, template, context)
+
 
 @login_required
 @enrollment_required

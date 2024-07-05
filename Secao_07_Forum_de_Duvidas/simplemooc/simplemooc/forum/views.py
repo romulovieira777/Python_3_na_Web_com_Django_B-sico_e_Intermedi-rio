@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from .models import Thread, Reply
 from .forms import ReplyForm
 
+
 # class ForumView(View):
 
 #     # template_name = 'forum/index.html'
@@ -21,7 +22,6 @@ from .forms import ReplyForm
 
 
 class ForumView(ListView):
-
     paginate_by = 2
     template_name = 'forum/index.html'
 
@@ -44,14 +44,13 @@ class ForumView(ListView):
 
 
 class ThreadView(DetailView):
-
     model = Thread
     template_name = 'forum/thread.html'
 
     def get(self, request, *args, **kwargs):
         response = super(ThreadView, self).get(request, *args, **kwargs)
         if not self.request.user.is_authenticated() or \
-            (self.object.author != self.request.user):
+                (self.object.author != self.request.user):
             self.object.views = self.object.views + 1
             self.object.save()
         return response
@@ -65,7 +64,7 @@ class ThreadView(DetailView):
     def post(self, request, *args, **kwargs):
         if not self.request.user.is_authenticated():
             messages.error(
-                self.request, 
+                self.request,
                 'Para responder ao tópico é necessário estar logado'
             )
             return redirect(self.request.path)
@@ -85,7 +84,6 @@ class ThreadView(DetailView):
 
 
 class ReplyCorrectView(View):
-
     correct = True
 
     def get(self, request, pk):
